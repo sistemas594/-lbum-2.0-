@@ -1,3 +1,7 @@
+# Upgrade Premium UI — Panini Mundial 2026
+
+## 1. REEMPLAZA TODO EL `<style>` ACTUAL POR ESTE
+
 ```css
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
@@ -43,6 +47,14 @@ body::before{
   pointer-events:none;
 }
 
+h2.sr-only{
+  position:absolute;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+}
+
 .app{
   padding:24px;
   max-width:1500px;
@@ -80,6 +92,8 @@ body::before{
 }
 
 .header-title{
+  position:relative;
+  z-index:2;
   font-size:34px;
   font-weight:800;
   letter-spacing:-1px;
@@ -89,9 +103,24 @@ body::before{
 }
 
 .header-sub{
-  margin-top:6px;
-  color:var(--muted);
-  font-size:14px;
+  position:relative;
+  z-index:2;
+  margin-top:10px;
+}
+
+.world-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(10px);
+  color:#d8e3f5;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.5px;
 }
 
 .stats-bar{
@@ -128,9 +157,13 @@ body::before{
   font-size:13px;
 }
 
-.controls input{
+.controls{
+  margin-bottom:24px;
+}
+
+.controls input[type=text]{
   width:100%;
-  height:52px;
+  height:54px;
   border:none;
   outline:none;
   padding:0 18px;
@@ -150,7 +183,7 @@ body::before{
   display:flex;
   gap:10px;
   flex-wrap:wrap;
-  margin:24px 0;
+  margin-bottom:24px;
 }
 
 .tab{
@@ -235,6 +268,10 @@ body::before{
   font-weight:700;
 }
 
+.team-prog{
+  margin-top:10px;
+}
+
 .prog-bar{
   height:12px;
   background:rgba(255,255,255,.08);
@@ -277,6 +314,29 @@ body::before{
   font-size:13px;
 }
 
+.detail-view.open{
+  display:block;
+}
+
+.team-view.hidden{
+  display:none;
+}
+
+.back-btn{
+  margin-bottom:18px;
+  border:none;
+  background:none;
+  color:#cbd5e1;
+  font-size:14px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.back-btn:hover{
+  transform:translateX(-4px);
+  color:white;
+}
+
 .detail-header{
   margin-bottom:30px;
   padding:24px;
@@ -284,6 +344,10 @@ body::before{
   background:rgba(255,255,255,.05);
   border:1px solid rgba(255,255,255,.08);
   backdrop-filter:blur(14px);
+}
+
+.detail-flag{
+  font-size:54px;
 }
 
 .detail-title{
@@ -320,9 +384,7 @@ body::before{
 }
 
 .sticker:hover{
-  transform:
-    translateY(-8px)
-    scale(1.03);
+  transform:translateY(-8px) scale(1.03);
   border-color:rgba(255,255,255,.18);
   box-shadow:0 20px 35px rgba(0,0,0,.3);
 }
@@ -402,27 +464,40 @@ body::before{
   box-shadow:0 4px 10px rgba(0,0,0,.3);
 }
 
-.back-btn{
-  margin-bottom:18px;
+.reset-btn{
+  position:relative;
+  z-index:2;
+  height:48px;
+  padding:0 18px;
   border:none;
-  background:none;
-  color:#cbd5e1;
-  font-size:14px;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.back-btn:hover{
-  transform:translateX(-4px);
+  border-radius:16px;
+  background:rgba(255,255,255,.07);
   color:white;
-}
-
-button{
+  font-weight:700;
+  cursor:pointer;
+  border:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(10px);
   transition:.25s;
 }
 
-button:hover{
-  transform:translateY(-2px);
+.reset-btn:hover{
+  transform:translateY(-3px);
+  background:rgba(255,255,255,.12);
+}
+
+.fade-in{
+  animation:fadeUp .5s ease;
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 @media(max-width:768px){
@@ -460,4 +535,44 @@ button:hover{
     min-height:110px;
   }
 }
+```
+
+---
+
+## 2. REEMPLAZA EL HEADER ACTUAL POR ESTE
+
+```html
+<div class="header">
+  <div>
+    <div class="header-title">
+      🏆 Álbum Panini · Mundial 2026
+    </div>
+
+    <div class="header-sub">
+      <span class="world-badge">
+        FIFA WORLD CUP 2026 COLLECTION · 48 SELECCIONES · 980 LÁMINAS
+      </span>
+    </div>
+  </div>
+
+  <button onclick="resetAll()" class="reset-btn">
+    ⟳ Reiniciar
+  </button>
+</div>
+```
+
+---
+
+## 3. CAMBIA ESTA LÍNEA EN `buildTeamCard()`
+
+### REEMPLAZA:
+
+```js
+ div.className='team-card'+(have===total?' done':'');
+```
+
+### POR:
+
+```js
+ div.className='team-card fade-in'+(have===total?' done':'');
 ```
