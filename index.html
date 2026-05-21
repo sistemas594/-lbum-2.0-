@@ -1,578 +1,999 @@
-# Upgrade Premium UI — Panini Mundial 2026
-
-## 1. REEMPLAZA TODO EL `<style>` ACTUAL POR ESTE
-
-```css
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080c14">
+<title>Álbum Panini · Mundial 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 
 :root{
-  --bg:#07111f;
-  --bg2:#0d1729;
-  --card:rgba(255,255,255,.06);
-  --border:rgba(255,255,255,.09);
-  --text:#ffffff;
-  --muted:#9fb0cc;
-  --gold:#f6c453;
-  --green:#2de38c;
-  --red:#ff6b6b;
-  --blue:#58a6ff;
+  --bg:#080c14;
+  --bg2:rgba(255,255,255,0.04);
+  --bg3:rgba(255,255,255,0.07);
+  --glass:rgba(255,255,255,0.06);
+  --glass-border:rgba(255,255,255,0.10);
+  --text:#f0f4ff;
+  --text2:rgba(200,210,255,0.65);
+  --text3:rgba(150,165,210,0.45);
+  --gold:#f5c842;
+  --gold2:#ffab00;
+  --green:#00e676;
+  --green2:#00c853;
+  --amber:#ffab40;
+  --amber2:#ff6d00;
+  --blue:#5c9eff;
+  --purple:#a855f7;
+  --r:14px;
+  --r-lg:20px;
 }
 
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+html{scroll-behavior:smooth}
 
 body{
-  font-family:'Inter',sans-serif;
-  background:
-    radial-gradient(circle at top left,#13325f 0%,transparent 30%),
-    radial-gradient(circle at bottom right,#1a2148 0%,transparent 30%),
-    linear-gradient(135deg,#07111f,#0a1323,#101b31);
+  background:var(--bg);
   color:var(--text);
+  font-family:'Sora',sans-serif;
   min-height:100vh;
   overflow-x:hidden;
 }
 
+/* ── AMBIENT BG ── */
 body::before{
-  content:'';
-  position:fixed;
-  inset:0;
+  content:'';position:fixed;inset:0;z-index:0;
   background:
-    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
-  background-size:40px 40px;
-  opacity:.2;
+    radial-gradient(ellipse 80% 60% at 20% 0%, rgba(59,91,219,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(120,40,180,0.14) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 50% 50%, rgba(0,200,120,0.06) 0%, transparent 70%);
+  pointer-events:none;
+}
+body::after{
+  content:'';position:fixed;inset:0;z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   pointer-events:none;
 }
 
-h2.sr-only{
-  position:absolute;
-  width:1px;
-  height:1px;
-  overflow:hidden;
-  clip:rect(0,0,0,0);
-}
-
-.app{
-  padding:24px;
-  max-width:1500px;
-  margin:auto;
-}
-
+/* ── HEADER ── */
 .header{
-  position:relative;
-  overflow:hidden;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-  padding:28px;
-  margin-bottom:24px;
-  border-radius:28px;
-  background:linear-gradient(135deg,rgba(26,39,69,.95),rgba(10,18,33,.85));
-  border:1px solid rgba(255,255,255,.08);
-  box-shadow:
-    0 20px 60px rgba(0,0,0,.45),
-    inset 0 1px 0 rgba(255,255,255,.08);
+  position:sticky;top:0;z-index:100;
+  padding:0;
+  background:rgba(8,12,20,0.75);
+  backdrop-filter:blur(24px) saturate(180%);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  border-bottom:1px solid rgba(255,255,255,0.07);
 }
+.header-inner{padding:14px 16px 0}
 
-.header::after{
-  content:'';
-  position:absolute;
-  width:300px;
-  height:300px;
-  border-radius:50%;
-  background:#1d4ed8;
-  filter:blur(120px);
-  top:-120px;
-  right:-100px;
-  opacity:.35;
-}
+.header-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:12px}
 
-.header-title{
-  position:relative;
-  z-index:2;
-  font-size:34px;
-  font-weight:800;
-  letter-spacing:-1px;
-  display:flex;
-  align-items:center;
-  gap:10px;
+.logo-wrap{display:flex;flex-direction:column;gap:2px}
+.logo-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:linear-gradient(135deg,rgba(245,200,66,0.15),rgba(255,171,0,0.08));
+  border:1px solid rgba(245,200,66,0.25);
+  border-radius:20px;padding:3px 10px 3px 7px;
+  width:fit-content;margin-bottom:4px;
 }
+.logo-badge span{font-size:10px;font-weight:600;letter-spacing:0.5px;color:var(--gold);text-transform:uppercase}
+.logo-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse-gold 2s infinite}
+@keyframes pulse-gold{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
 
-.header-sub{
-  position:relative;
-  z-index:2;
-  margin-top:10px;
+.logo-title{font-size:20px;font-weight:800;letter-spacing:-0.5px;color:var(--text);line-height:1}
+.logo-title span{
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
-
-.world-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:8px 14px;
-  border-radius:999px;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.08);
-  backdrop-filter:blur(10px);
-  color:#d8e3f5;
-  font-size:12px;
-  font-weight:700;
-  letter-spacing:.5px;
-}
-
-.stats-bar{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
-  margin-bottom:22px;
-}
-
-.stat{
-  background:var(--card);
-  backdrop-filter:blur(12px);
-  border:1px solid var(--border);
-  border-radius:22px;
-  padding:22px;
-  text-align:center;
-  transition:.3s;
-  box-shadow:0 10px 30px rgba(0,0,0,.25);
-}
-
-.stat:hover{
-  transform:translateY(-6px);
-  border-color:rgba(255,255,255,.18);
-}
-
-.stat-num{
-  font-size:34px;
-  font-weight:800;
-}
-
-.stat-lbl{
-  margin-top:6px;
-  color:var(--muted);
-  font-size:13px;
-}
-
-.controls{
-  margin-bottom:24px;
-}
-
-.controls input[type=text]{
-  width:100%;
-  height:54px;
-  border:none;
-  outline:none;
-  padding:0 18px;
-  border-radius:18px;
-  background:rgba(255,255,255,.07);
-  color:white;
-  font-size:14px;
-  border:1px solid rgba(255,255,255,.08);
-  backdrop-filter:blur(10px);
-}
-
-.controls input::placeholder{
-  color:#8ca0bf;
-}
-
-.tab-bar{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-bottom:24px;
-}
-
-.tab{
-  border:none;
-  cursor:pointer;
-  padding:12px 18px;
-  border-radius:16px;
-  background:rgba(255,255,255,.05);
-  color:#aab9d1;
-  transition:.25s;
-  font-weight:600;
-  border:1px solid rgba(255,255,255,.06);
-}
-
-.tab:hover{
-  transform:translateY(-2px);
-  background:rgba(255,255,255,.09);
-}
-
-.tab.active{
-  background:linear-gradient(135deg,#2563eb,#3b82f6);
-  color:white;
-  box-shadow:0 10px 30px rgba(37,99,235,.4);
-}
-
-.team-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-  gap:20px;
-}
-
-.team-card{
-  position:relative;
-  overflow:hidden;
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:26px;
-  padding:20px;
-  cursor:pointer;
-  transition:.35s ease;
-  backdrop-filter:blur(16px);
-  box-shadow:0 15px 40px rgba(0,0,0,.25);
-}
-
-.team-card::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:linear-gradient(135deg,transparent,rgba(255,255,255,.05));
-  opacity:0;
-  transition:.3s;
-}
-
-.team-card:hover{
-  transform:translateY(-8px) scale(1.02);
-  border-color:rgba(255,255,255,.18);
-}
-
-.team-card:hover::before{
-  opacity:1;
-}
-
-.team-card.done{
-  border-color:rgba(45,227,140,.5);
-  box-shadow:0 0 30px rgba(45,227,140,.25);
-}
-
-.team-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:18px;
-}
-
-.team-flag{
-  font-size:42px;
-  filter:drop-shadow(0 5px 10px rgba(0,0,0,.35));
-}
-
-.team-name{
-  font-size:18px;
-  font-weight:700;
-}
-
-.team-prog{
-  margin-top:10px;
-}
-
-.prog-bar{
-  height:12px;
-  background:rgba(255,255,255,.08);
-  border-radius:999px;
-  overflow:hidden;
-}
-
-.prog-fill{
-  height:100%;
-  border-radius:999px;
-  background:linear-gradient(90deg,#22c55e,#4ade80,#86efac);
-  box-shadow:
-    0 0 12px rgba(74,222,128,.8),
-    0 0 30px rgba(74,222,128,.35);
-  transition:width .5s ease;
-  position:relative;
-}
-
-.prog-fill::after{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:linear-gradient(
-    120deg,
-    transparent 20%,
-    rgba(255,255,255,.45) 50%,
-    transparent 80%
-  );
-  animation:shine 2.5s linear infinite;
-}
-
-@keyframes shine{
-  from{transform:translateX(-100%)}
-  to{transform:translateX(200%)}
-}
-
-.prog-lbl{
-  margin-top:10px;
-  color:#b3c1d8;
-  font-size:13px;
-}
-
-.detail-view.open{
-  display:block;
-}
-
-.team-view.hidden{
-  display:none;
-}
-
-.back-btn{
-  margin-bottom:18px;
-  border:none;
-  background:none;
-  color:#cbd5e1;
-  font-size:14px;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.back-btn:hover{
-  transform:translateX(-4px);
-  color:white;
-}
-
-.detail-header{
-  margin-bottom:30px;
-  padding:24px;
-  border-radius:28px;
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.08);
-  backdrop-filter:blur(14px);
-}
-
-.detail-flag{
-  font-size:54px;
-}
-
-.detail-title{
-  font-size:32px;
-  font-weight:800;
-}
-
-.detail-sub{
-  margin-top:4px;
-  color:#9fb0cc;
-}
-
-.stickers-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(110px,1fr));
-  gap:16px;
-}
-
-.sticker{
-  position:relative;
-  overflow:hidden;
-  min-height:120px;
-  border-radius:22px;
-  padding:14px 10px;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.08);
-  text-align:center;
-  cursor:pointer;
-  transition:.3s;
-  backdrop-filter:blur(10px);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-
-.sticker:hover{
-  transform:translateY(-8px) scale(1.03);
-  border-color:rgba(255,255,255,.18);
-  box-shadow:0 20px 35px rgba(0,0,0,.3);
-}
-
-.sticker.have{
-  background:
-    linear-gradient(145deg,
-      rgba(45,227,140,.18),
-      rgba(45,227,140,.08)
-    );
-  border-color:rgba(45,227,140,.4);
-}
-
-.sticker.repeated{
-  background:
-    linear-gradient(145deg,
-      rgba(246,196,83,.2),
-      rgba(246,196,83,.08)
-    );
-  border-color:rgba(246,196,83,.45);
-}
-
-.sticker.foil{
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,215,0,.18),
-      rgba(255,255,255,.08),
-      rgba(255,215,0,.14)
-    );
-  border:1px solid rgba(255,215,0,.35);
-}
-
-.sticker.foil::before{
-  content:'';
-  position:absolute;
-  inset:-100%;
-  background:
-    linear-gradient(
-      120deg,
-      transparent 20%,
-      rgba(255,255,255,.45) 50%,
-      transparent 80%
-    );
-  animation:foil 4s linear infinite;
-}
-
-@keyframes foil{
-  from{transform:translateX(-100%) rotate(20deg)}
-  to{transform:translateX(100%) rotate(20deg)}
-}
-
-.sticker-code{
-  font-size:11px;
-  font-weight:800;
-  letter-spacing:.5px;
-  color:#cfd9ea;
-  margin-bottom:8px;
-}
-
-.sticker-name{
-  font-size:12px;
-  line-height:1.35;
-  font-weight:600;
-}
-
-.rep-badge{
-  position:absolute;
-  top:8px;
-  right:8px;
-  background:linear-gradient(135deg,#f59e0b,#facc15);
-  color:black;
-  font-size:10px;
-  font-weight:800;
-  padding:4px 7px;
-  border-radius:999px;
-  box-shadow:0 4px 10px rgba(0,0,0,.3);
-}
+.logo-sub{font-size:11px;font-weight:400;color:var(--text3);margin-top:2px}
 
 .reset-btn{
-  position:relative;
-  z-index:2;
-  height:48px;
-  padding:0 18px;
-  border:none;
-  border-radius:16px;
-  background:rgba(255,255,255,.07);
-  color:white;
-  font-weight:700;
-  cursor:pointer;
-  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.10);
+  color:var(--text2);font-size:12px;
+  padding:7px 12px;border-radius:10px;cursor:pointer;
+  font-family:'Sora',sans-serif;
+  transition:all 0.2s;white-space:nowrap;
   backdrop-filter:blur(10px);
-  transition:.25s;
+}
+.reset-btn:hover{background:rgba(255,255,255,0.09);border-color:rgba(255,255,255,0.18);color:var(--text)}
+
+/* ── STATS ── */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.stat{
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  border-radius:12px;
+  padding:9px 6px;text-align:center;
+  backdrop-filter:blur(10px);
+  position:relative;overflow:hidden;
+  transition:transform 0.2s;
+}
+.stat::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.04),transparent);
+  pointer-events:none;
+}
+.stat-num{
+  font-size:21px;font-weight:800;line-height:1;
+  background:linear-gradient(135deg,var(--text),rgba(200,210,255,0.8));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.stat-num.green{background:linear-gradient(135deg,#00e676,#69f0ae);-webkit-background-clip:text;background-clip:text}
+.stat-num.amber{background:linear-gradient(135deg,#ffab40,#ffd740);-webkit-background-clip:text;background-clip:text}
+.stat-num.blue{background:linear-gradient(135deg,var(--blue),#82b1ff);-webkit-background-clip:text;background-clip:text}
+.stat-lbl{font-size:9px;font-weight:500;color:var(--text3);margin-top:3px;text-transform:uppercase;letter-spacing:0.5px}
+
+/* ── PROGRESS HEADER ── */
+.header-progress{margin-bottom:10px}
+.hp-bar{
+  height:3px;
+  background:rgba(255,255,255,0.08);
+  border-radius:3px;overflow:hidden;
+}
+.hp-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--blue),var(--purple),var(--gold));
+  background-size:200% 100%;
+  border-radius:3px;
+  transition:width 0.6s cubic-bezier(0.4,0,0.2,1);
+  animation:shimmer-bar 3s linear infinite;
+}
+@keyframes shimmer-bar{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* ── SEARCH ── */
+.search-wrap{position:relative;margin-bottom:10px}
+.search-wrap input{
+  width:100%;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:12px;
+  color:var(--text);
+  font-family:'Sora',sans-serif;
+  font-size:14px;
+  padding:9px 14px 9px 38px;
+  outline:none;
+  transition:border-color 0.2s,background 0.2s;
+  backdrop-filter:blur(10px);
+}
+.search-wrap input:focus{
+  border-color:rgba(92,158,255,0.4);
+  background:rgba(92,158,255,0.06);
+}
+.search-wrap input::placeholder{color:var(--text3)}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:15px;pointer-events:none}
+
+/* ── TABS ── */
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:12px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  white-space:nowrap;padding:6px 14px;
+  border-radius:20px;font-size:11px;font-weight:600;
+  cursor:pointer;letter-spacing:0.3px;
+  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(255,255,255,0.04);
+  color:var(--text2);
+  font-family:'Sora',sans-serif;
+  transition:all 0.2s;
+}
+.tab.active{
+  background:linear-gradient(135deg,rgba(92,158,255,0.25),rgba(168,85,247,0.15));
+  border-color:rgba(92,158,255,0.4);
+  color:var(--text);
+  box-shadow:0 0 16px rgba(92,158,255,0.2);
 }
 
-.reset-btn:hover{
-  transform:translateY(-3px);
-  background:rgba(255,255,255,.12);
+/* ── MAIN ── */
+.main{padding:14px 14px 3rem;position:relative;z-index:1}
+
+.pwa-hint{
+  background:linear-gradient(135deg,rgba(245,200,66,0.08),rgba(255,171,0,0.04));
+  border:1px solid rgba(245,200,66,0.2);
+  border-radius:12px;padding:10px 12px;margin-bottom:14px;
+  font-size:12px;color:rgba(245,200,66,0.85);
+  display:flex;align-items:center;gap:8px;
+}
+.pwa-hint button{background:none;border:none;color:rgba(245,200,66,0.6);font-size:18px;cursor:pointer;margin-left:auto;line-height:1}
+
+/* ── SECTION TITLE ── */
+.section-title{
+  font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:1.5px;
+  color:var(--text3);
+  margin:20px 0 10px;
+  display:flex;align-items:center;gap:8px;
+}
+.section-title::before{content:'';width:3px;height:12px;background:linear-gradient(135deg,var(--blue),var(--purple));border-radius:2px}
+
+/* ── TEAM GRID ── */
+.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px}
+@media(max-width:380px){.team-grid{grid-template-columns:repeat(2,1fr)}}
+
+.team-card{
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  border-radius:var(--r-lg);
+  overflow:hidden;cursor:pointer;
+  transition:transform 0.25s cubic-bezier(0.4,0,0.2,1),
+              box-shadow 0.25s,border-color 0.25s;
+  position:relative;
+  backdrop-filter:blur(16px);
+}
+.team-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.05) 0%,transparent 60%);
+  pointer-events:none;z-index:0;
+}
+.team-card:hover{
+  transform:translateY(-3px) scale(1.01);
+  border-color:rgba(92,158,255,0.3);
+  box-shadow:0 12px 40px rgba(0,0,0,0.4),0 0 20px rgba(92,158,255,0.1);
+}
+.team-card:active{transform:scale(0.97);transition-duration:0.1s}
+
+.team-card.done{
+  border-color:rgba(0,230,118,0.35);
+  background:linear-gradient(135deg,rgba(0,230,118,0.08),rgba(255,255,255,0.04));
+}
+.team-card.done::after{
+  content:'✓';
+  position:absolute;top:8px;right:10px;
+  width:18px;height:18px;
+  background:linear-gradient(135deg,var(--green),var(--green2));
+  color:#000;font-size:10px;font-weight:800;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  line-height:18px;text-align:center;z-index:2;
 }
 
-.fade-in{
-  animation:fadeUp .5s ease;
+.tc-top{
+  padding:14px 12px 8px;
+  display:flex;align-items:center;gap:10px;
+  position:relative;z-index:1;
+}
+.tc-flag{font-size:28px;line-height:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.4))}
+.tc-name{font-size:12px;font-weight:700;color:var(--text);line-height:1.3}
+.tc-group{font-size:10px;font-weight:500;color:var(--text3);margin-top:2px}
+
+.tc-bottom{padding:0 12px 12px;position:relative;z-index:1}
+.prog-bar{
+  height:5px;
+  background:rgba(255,255,255,0.08);
+  border-radius:3px;overflow:hidden;
+  position:relative;
+}
+.prog-fill{
+  height:100%;border-radius:3px;
+  transition:width 0.5s cubic-bezier(0.4,0,0.2,1);
+  background:linear-gradient(90deg,var(--blue),var(--purple));
+  box-shadow:0 0 8px rgba(92,158,255,0.5);
+  animation:shimmer-bar 3s linear infinite;
+  background-size:200% 100%;
+}
+.prog-fill.done-fill{background:linear-gradient(90deg,var(--green),#69f0ae);box-shadow:0 0 8px rgba(0,230,118,0.4)}
+.tc-count{font-size:10px;font-weight:500;color:var(--text3);margin-top:5px}
+
+.empty{text-align:center;padding:3rem 1rem;color:var(--text3);font-size:14px}
+
+/* ── DETAIL ── */
+.teams-section.hidden{display:none}
+.detail{display:none}
+.detail.open{display:block;animation:fadeUp 0.3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.back-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--glass);border:1px solid var(--glass-border);
+  color:var(--text2);font-size:13px;font-weight:500;
+  cursor:pointer;padding:8px 14px;border-radius:10px;
+  font-family:'Sora',sans-serif;
+  transition:all 0.2s;margin-bottom:14px;
+  backdrop-filter:blur(10px);
+}
+.back-btn:hover{color:var(--text);border-color:rgba(255,255,255,0.2)}
+
+.detail-head{
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  border-radius:var(--r-lg);
+  padding:16px;margin-bottom:16px;
+  backdrop-filter:blur(20px);
+  position:relative;overflow:hidden;
+}
+.detail-head::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(92,158,255,0.08),rgba(168,85,247,0.05));
+  pointer-events:none;
+}
+.detail-head-content{display:flex;align-items:center;gap:14px;position:relative;z-index:1}
+.d-flag{font-size:44px;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.5))}
+.d-info h2{font-size:22px;font-weight:800;color:var(--text);letter-spacing:-0.5px}
+.d-info p{font-size:12px;color:var(--text2);margin-top:3px}
+.d-prog-bar{
+  margin-top:10px;
+  height:6px;background:rgba(255,255,255,0.08);
+  border-radius:3px;overflow:hidden;
+}
+.d-prog-fill{
+  height:100%;border-radius:3px;
+  background:linear-gradient(90deg,var(--blue),var(--purple),var(--gold));
+  background-size:200% 100%;
+  animation:shimmer-bar 3s linear infinite;
+  transition:width 0.6s cubic-bezier(0.4,0,0.2,1);
+  box-shadow:0 0 10px rgba(92,158,255,0.4);
 }
 
-@keyframes fadeUp{
-  from{
-    opacity:0;
-    transform:translateY(20px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+/* ── STICKERS GRID ── */
+.stickers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(82px,1fr));gap:8px}
+@media(max-width:360px){.stickers-grid{grid-template-columns:repeat(3,1fr)}}
+
+.sticker{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:12px;
+  padding:10px 6px 8px;
+  text-align:center;cursor:pointer;
+  user-select:none;
+  transition:all 0.2s cubic-bezier(0.4,0,0.2,1);
+  position:relative;overflow:hidden;
+  backdrop-filter:blur(8px);
+}
+.sticker::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.04),transparent);
+  pointer-events:none;
+  transition:opacity 0.2s;
+}
+.sticker:hover{
+  transform:translateY(-2px) scale(1.03);
+  border-color:rgba(92,158,255,0.35);
+  background:rgba(92,158,255,0.08);
+  box-shadow:0 8px 24px rgba(0,0,0,0.3),0 0 12px rgba(92,158,255,0.1);
+}
+.sticker:active{transform:scale(0.93);transition-duration:0.08s}
+
+/* FOIL sticker */
+.sticker.foil{
+  background:linear-gradient(135deg,rgba(245,200,66,0.08),rgba(255,171,0,0.04));
+  border-color:rgba(245,200,66,0.25);
+}
+.sticker.foil::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,
+    transparent 0%,rgba(245,200,66,0.06) 30%,
+    rgba(255,255,255,0.08) 50%,
+    rgba(245,200,66,0.06) 70%,transparent 100%);
+  background-size:200% 200%;
+  animation:foil-shimmer 4s linear infinite;
+  pointer-events:none;
+}
+@keyframes foil-shimmer{
+  0%{background-position:200% 200%}
+  100%{background-position:-200% -200%}
 }
 
-@media(max-width:768px){
-
-  .app{
-    padding:14px;
-  }
-
-  .header{
-    padding:22px;
-    border-radius:24px;
-  }
-
-  .header-title{
-    font-size:26px;
-  }
-
-  .stats-bar{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .team-grid{
-    grid-template-columns:1fr;
-  }
-
-  .stickers-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .team-card{
-    padding:18px;
-  }
-
-  .sticker{
-    min-height:110px;
-  }
+/* HAVE state */
+.sticker.have{
+  background:linear-gradient(135deg,rgba(0,230,118,0.12),rgba(0,200,83,0.06));
+  border-color:rgba(0,230,118,0.4);
+  box-shadow:0 0 12px rgba(0,230,118,0.1),inset 0 1px 0 rgba(0,230,118,0.2);
 }
-```
+.sticker.have::before{background:linear-gradient(135deg,rgba(0,230,118,0.08),transparent)}
 
----
+/* REPEATED state */
+.sticker.repeated{
+  background:linear-gradient(135deg,rgba(255,171,64,0.15),rgba(255,109,0,0.06));
+  border-color:rgba(255,171,64,0.5);
+  box-shadow:0 0 12px rgba(255,171,64,0.12),inset 0 1px 0 rgba(255,171,64,0.2);
+}
 
-## 2. REEMPLAZA EL HEADER ACTUAL POR ESTE
+.s-num{
+  font-size:9px;font-weight:700;
+  color:var(--text3);
+  font-family:'Sora',sans-serif;
+  letter-spacing:0.3px;
+  margin-bottom:5px;
+}
+.sticker.foil .s-num{color:rgba(245,200,66,0.7)}
+.sticker.have .s-num{color:rgba(0,230,118,0.8)}
+.sticker.repeated .s-num{color:rgba(255,171,64,0.9)}
 
-```html
+.s-icon{font-size:18px;line-height:1;margin-bottom:4px;display:block}
+.sticker.foil .s-icon::after{content:'✦';font-size:8px;color:var(--gold);vertical-align:super;margin-left:1px}
+
+.s-name{
+  font-size:9.5px;font-weight:500;
+  color:var(--text2);line-height:1.3;
+  font-family:'Sora',sans-serif;
+}
+.sticker.have .s-name{color:rgba(105,240,174,0.9)}
+.sticker.repeated .s-name{color:rgba(255,213,79,0.9)}
+
+.rep-badge{
+  position:absolute;top:4px;right:4px;
+  background:linear-gradient(135deg,var(--amber),var(--amber2));
+  color:#000;font-size:9px;font-weight:800;
+  border-radius:5px;padding:2px 4px;line-height:1.2;
+  box-shadow:0 2px 6px rgba(255,109,0,0.4);
+  z-index:3;
+}
+
+.sticker-check{
+  position:absolute;bottom:3px;right:4px;
+  font-size:10px;color:rgba(0,230,118,0.7);
+  z-index:3;
+}
+
+.hint{
+  font-size:11px;font-weight:500;
+  color:var(--text3);margin-top:14px;
+  text-align:center;
+  padding:10px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:10px;
+  letter-spacing:0.2px;
+}
+
+/* ── RESPONSIVE ── */
+@media(min-width:640px){
+  .header-inner{padding:16px 20px 0}
+  .main{padding:16px 20px 3rem}
+  .team-grid{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+}
+</style>
+</head>
+<body>
+
 <div class="header">
-  <div>
-    <div class="header-title">
-      🏆 Álbum Panini · Mundial 2026
+  <div class="header-inner">
+    <div class="header-top">
+      <div class="logo-wrap">
+        <div class="logo-badge">
+          <span class="logo-dot"></span>
+          <span>FIFA World Cup 2026™</span>
+        </div>
+        <div class="logo-title">⚽ Álbum <span>Panini</span></div>
+        <div class="logo-sub">48 selecciones · 980 láminas · edición premium</div>
+      </div>
+      <button class="reset-btn" onclick="resetAll()">↺ Reiniciar</button>
     </div>
 
-    <div class="header-sub">
-      <span class="world-badge">
-        FIFA WORLD CUP 2026 COLLECTION · 48 SELECCIONES · 980 LÁMINAS
-      </span>
+    <div class="stats" id="stats"></div>
+
+    <div class="header-progress">
+      <div class="hp-bar"><div class="hp-fill" id="hp-fill" style="width:0%"></div></div>
+    </div>
+
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search" placeholder="Buscar selección o jugador..." oninput="filterTeams()">
+    </div>
+
+    <div class="tabs">
+      <div class="tab active" onclick="setView('all',this)">🌍 Todas</div>
+      <div class="tab" onclick="setView('missing',this)">⭕ Faltantes</div>
+      <div class="tab" onclick="setView('complete',this)">✅ Completas</div>
+      <div class="tab" onclick="setView('special',this)">⭐ Especiales</div>
     </div>
   </div>
-
-  <button onclick="resetAll()" class="reset-btn">
-    ⟳ Reiniciar
-  </button>
 </div>
-```
 
----
+<div class="main">
+  <div id="pwa-hint" class="pwa-hint">
+    📱 <span>Agrega esta página a tu pantalla de inicio para usarla como app sin internet.</span>
+    <button onclick="document.getElementById('pwa-hint').style.display='none'">×</button>
+  </div>
 
-## 3. CAMBIA ESTA LÍNEA EN `buildTeamCard()`
+  <div id="teams-section" class="teams-section">
+    <div class="team-grid" id="team-grid"></div>
+    <div class="empty" id="empty" style="display:none">No se encontraron selecciones</div>
+  </div>
 
-### REEMPLAZA:
+  <div id="detail" class="detail">
+    <button class="back-btn" onclick="closeDetail()">← Volver</button>
+    <div class="detail-head">
+      <div class="detail-head-content">
+        <span class="d-flag" id="d-flag"></span>
+        <div class="d-info">
+          <h2 id="d-name"></h2>
+          <p id="d-sub"></p>
+          <div class="d-prog-bar"><div class="d-prog-fill" id="d-prog-fill"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="stickers-grid" id="d-stickers"></div>
+    <p class="hint">1 toque = tengo &nbsp;·&nbsp; 2 toques = repetida 🔁 &nbsp;·&nbsp; 3 toques = quitar</p>
+  </div>
+</div>
 
-```js
- div.className='team-card'+(have===total?' done':'');
-```
+<script>
+const SK='panini2026_v5';
+const TEAMS=[
+  {code:'FWC',name:'Sección oficial',flag:'🏆',special:true,stickers:[
+    {n:'00',name:'Logo Panini',foil:true},{n:'FWC1',name:'Emblema oficial',foil:true},{n:'FWC2',name:'Emblema 2',foil:true},
+    {n:'FWC3',name:'Mascotas',foil:true},{n:'FWC4',name:'Eslogan',foil:true},{n:'FWC5',name:'Balón oficial',foil:true},
+    {n:'FWC6',name:'Canadá — Sede',foil:true},{n:'FWC7',name:'México — Sede',foil:true},{n:'FWC8',name:'EE.UU. — Sede',foil:true},
+  ]},
+  {code:'MEX',name:'México',flag:'🇲🇽',group:'A',stickers:[
+    {n:'MEX1',name:'Escudo',foil:true},{n:'MEX2',name:'Malagón'},{n:'MEX3',name:'J. Vásquez'},{n:'MEX4',name:'J. Sánchez'},
+    {n:'MEX5',name:'C. Montes'},{n:'MEX6',name:'J. Gallardo'},{n:'MEX7',name:'I. Reyes'},{n:'MEX8',name:'D. Lainez'},
+    {n:'MEX9',name:'C. Rodríguez'},{n:'MEX10',name:'E. Álvarez'},{n:'MEX11',name:'O. Pineda'},{n:'MEX12',name:'M. Ruiz'},
+    {n:'MEX13',name:'Foto grupal'},{n:'MEX14',name:'É. Sánchez'},{n:'MEX15',name:'H. Lozano'},{n:'MEX16',name:'S. Giménez'},
+    {n:'MEX17',name:'R. Jiménez'},{n:'MEX18',name:'A. Vega'},{n:'MEX19',name:'R. Alvarado'},{n:'MEX20',name:'C. Huerta'},
+  ]},
+  {code:'RSA',name:'Sudáfrica',flag:'🇿🇦',group:'A',stickers:[
+    {n:'RSA1',name:'Escudo',foil:true},{n:'RSA2',name:'R. Williams'},{n:'RSA3',name:'S. Chaine'},{n:'RSA4',name:'A. Modiba'},
+    {n:'RSA5',name:'S. Kambule'},{n:'RSA6',name:'G. Kekana'},{n:'RSA7',name:'S. Xulu'},{n:'RSA8',name:'R. De Reuck'},
+    {n:'RSA9',name:'T. Mokoena'},{n:'RSA10',name:'G. Mosele'},{n:'RSA11',name:'T. Zwane'},{n:'RSA12',name:'L. Lakay'},
+    {n:'RSA13',name:'Foto grupal'},{n:'RSA14',name:'Percy Tau'},{n:'RSA15',name:'B. Cross'},{n:'RSA16',name:'Bafana logo'},
+    {n:'RSA17',name:'E. Mokwana'},{n:'RSA18',name:'K. Mudau'},{n:'RSA19',name:'K. Dolly'},{n:'RSA20',name:'V. Letsoalo'},
+  ]},
+  {code:'SEN',name:'Senegal',flag:'🇸🇳',group:'A',stickers:[
+    {n:'SEN1',name:'Escudo',foil:true},{n:'SEN2',name:'É. Mendy'},{n:'SEN3',name:'S. Dieng'},{n:'SEN4',name:'Y. Sabaly'},
+    {n:'SEN5',name:'K. Koulibaly'},{n:'SEN6',name:'A. Diallo'},{n:'SEN7',name:'I. Jakobs'},{n:'SEN8',name:'N. Mendy'},
+    {n:'SEN9',name:'C. Kouyaté'},{n:'SEN10',name:'M. Niakhaté'},{n:'SEN11',name:'I. Gueye'},{n:'SEN12',name:'K. Diatta'},
+    {n:'SEN13',name:'Foto grupal'},{n:'SEN14',name:'B. Dia'},{n:'SEN15',name:'H. Diallo'},{n:'SEN16',name:'N. Jackson'},
+    {n:'SEN17',name:'Sadio Mané',foil:true},{n:'SEN18',name:'I. Ndiaye'},{n:'SEN19',name:'I. Sarr'},{n:'SEN20',name:'L. Camara'},
+  ]},
+  {code:'NZL',name:'Nueva Zelanda',flag:'🇳🇿',group:'A',stickers:[
+    {n:'NZL1',name:'Escudo',foil:true},{n:'NZL2',name:'O. Sail'},{n:'NZL3',name:'M. Melvin'},{n:'NZL4',name:'M. Boxall'},
+    {n:'NZL5',name:'T. Payne'},{n:'NZL6',name:'L. Cacace'},{n:'NZL7',name:'A. Greive'},{n:'NZL8',name:'J. Bell'},
+    {n:'NZL9',name:'M. Rojas'},{n:'NZL10',name:'E. Just'},{n:'NZL11',name:'T. Smith'},{n:'NZL12',name:'M. Stamenic'},
+    {n:'NZL13',name:'Foto grupal'},{n:'NZL14',name:'C. Lewis'},{n:'NZL15',name:'R. Donelon'},{n:'NZL16',name:'C. Elliot'},
+    {n:'NZL17',name:'Chris Wood'},{n:'NZL18',name:'M. Garbett'},{n:'NZL19',name:'Ben Old'},{n:'NZL20',name:'S. Singh'},
+  ]},
+  {code:'NED',name:'Países Bajos',flag:'🇳🇱',group:'B',stickers:[
+    {n:'NED1',name:'Escudo',foil:true},{n:'NED2',name:'B. Verbruggen'},{n:'NED3',name:'Van Dijk'},{n:'NED4',name:'J. Timber'},
+    {n:'NED5',name:'M. de Ligt'},{n:'NED6',name:'N. Aké'},{n:'NED7',name:'D. Blind'},{n:'NED8',name:'F. de Jong'},
+    {n:'NED9',name:'T. Reijnders'},{n:'NED10',name:'R. Gravenberch'},{n:'NED11',name:'X. Simons'},{n:'NED12',name:'T. Koopmeiners'},
+    {n:'NED13',name:'Foto grupal'},{n:'NED14',name:'C. Gakpo'},{n:'NED15',name:'D. Malen'},{n:'NED16',name:'M. Depay'},
+    {n:'NED17',name:'W. Weghorst'},{n:'NED18',name:'B. Brobbey'},{n:'NED19',name:'J. Frimpong'},{n:'NED20',name:'D. Dumfries'},
+  ]},
+  {code:'IRN',name:'Irán',flag:'🇮🇷',group:'B',stickers:[
+    {n:'IRN1',name:'Escudo',foil:true},{n:'IRN2',name:'A. Beiranvand'},{n:'IRN3',name:'H. Hosseini'},{n:'IRN4',name:'R. Rezaeian'},
+    {n:'IRN5',name:'M. Hosseini'},{n:'IRN6',name:'M. Mohammadi'},{n:'IRN7',name:'S. Khalilzadeh'},{n:'IRN8',name:'A. Nourollahi'},
+    {n:'IRN9',name:'S. Ezatolahi'},{n:'IRN10',name:'A. Gholizadeh'},{n:'IRN11',name:'A. Jahanbakhsh'},{n:'IRN12',name:'S. Ghoddos'},
+    {n:'IRN13',name:'Foto grupal'},{n:'IRN14',name:'M. Taremi'},{n:'IRN15',name:'S. Azmoun'},{n:'IRN16',name:'K. Ansarifard'},
+    {n:'IRN17',name:'A. Sayyadmanesh'},{n:'IRN18',name:'M. Mohebi'},{n:'IRN19',name:'R. Cheshmi'},{n:'IRN20',name:'E. Hajsafi'},
+  ]},
+  {code:'KSA',name:'Arabia Saudita',flag:'🇸🇦',group:'B',stickers:[
+    {n:'KSA1',name:'Escudo',foil:true},{n:'KSA2',name:'M. Al-Owais'},{n:'KSA3',name:'A. Al-Bulayhi'},{n:'KSA4',name:'S. Abdulhamid'},
+    {n:'KSA5',name:'H. Tambakti'},{n:'KSA6',name:'M. Al-Burayk'},{n:'KSA7',name:'A. Al-Hassan'},{n:'KSA8',name:'M. Kanno'},
+    {n:'KSA9',name:'N. Al-Dawsari'},{n:'KSA10',name:'S. Al-Shehri'},{n:'KSA11',name:'F. Al-Buraikan'},{n:'KSA12',name:'A. Al-Hamdan'},
+    {n:'KSA13',name:'Foto grupal'},{n:'KSA14',name:'R. Sharahili'},{n:'KSA15',name:'H. Bahebri'},{n:'KSA16',name:'S. Al-Dawsari'},
+    {n:'KSA17',name:'Y. Al-Shahrani'},{n:'KSA18',name:'A. Al-Malki'},{n:'KSA19',name:'M. Al-Sahafi'},{n:'KSA20',name:'A. Radif'},
+  ]},
+  {code:'UGA',name:'Uganda',flag:'🇺🇬',group:'B',stickers:[
+    {n:'UGA1',name:'Escudo',foil:true},{n:'UGA2',name:'C. Lukwata'},{n:'UGA3',name:'D. Onyango'},{n:'UGA4',name:'I. Isinde'},
+    {n:'UGA5',name:'B. Mugabi'},{n:'UGA6',name:'N. Wadada'},{n:'UGA7',name:'H. Lwaliwa'},{n:'UGA8',name:'M. Waiswa'},
+    {n:'UGA9',name:'A. Okello'},{n:'UGA10',name:'F. Miya'},{n:'UGA11',name:'E. Okwi'},{n:'UGA12',name:'P. Kaddu'},
+    {n:'UGA13',name:'Foto grupal'},{n:'UGA14',name:'J. Ochaya'},{n:'UGA15',name:'A. Lumala'},{n:'UGA16',name:'Y. Sentamu'},
+    {n:'UGA17',name:'F. Bayo'},{n:'UGA18',name:'B. Byaruhanga'},{n:'UGA19',name:'S. Batambuze'},{n:'UGA20',name:'B. Anukani'},
+  ]},
+  {code:'ARG',name:'Argentina',flag:'🇦🇷',group:'C',stickers:[
+    {n:'ARG1',name:'Escudo',foil:true},{n:'ARG2',name:'E. Martínez'},{n:'ARG3',name:'N. Molina'},{n:'ARG4',name:'C. Romero'},
+    {n:'ARG5',name:'L. Martínez'},{n:'ARG6',name:'N. Otamendi'},{n:'ARG7',name:'M. Acuña'},{n:'ARG8',name:'R. De Paul'},
+    {n:'ARG9',name:'E. Fernández'},{n:'ARG10',name:'A. Mac Allister'},{n:'ARG11',name:'N. González'},{n:'ARG12',name:'T. Almada'},
+    {n:'ARG13',name:'Foto grupal'},{n:'ARG14',name:'Á. Di María'},{n:'ARG15',name:'J. Álvarez'},{n:'ARG16',name:'L. Martínez'},
+    {n:'ARG17',name:'P. Dybala'},{n:'ARG18',name:'A. Garnacho'},{n:'ARG19',name:'Lionel Messi',foil:true},{n:'ARG20',name:'G. Lo Celso'},
+  ]},
+  {code:'MAR',name:'Marruecos',flag:'🇲🇦',group:'C',stickers:[
+    {n:'MAR1',name:'Escudo',foil:true},{n:'MAR2',name:'Y. Bounou'},{n:'MAR3',name:'N. Aguerd'},{n:'MAR4',name:'A. Hakimi'},
+    {n:'MAR5',name:'R. Saïss'},{n:'MAR6',name:'J. El Yamiq'},{n:'MAR7',name:'N. Mazraoui'},{n:'MAR8',name:'S. Amrabat'},
+    {n:'MAR9',name:'S. Amallah'},{n:'MAR10',name:'A. Ounahi'},{n:'MAR11',name:'H. Ziyech'},{n:'MAR12',name:'I. Chair'},
+    {n:'MAR13',name:'Foto grupal'},{n:'MAR14',name:'Y. En-Nesyri'},{n:'MAR15',name:'S. Boufal'},{n:'MAR16',name:'A. Hamdallah'},
+    {n:'MAR17',name:'A. Zaroury'},{n:'MAR18',name:'A. Ezzalzouli'},{n:'MAR19',name:'Z. Aboukhlal'},{n:'MAR20',name:'I. Diaz'},
+  ]},
+  {code:'SVK',name:'Eslovaquia',flag:'🇸🇰',group:'C',stickers:[
+    {n:'SVK1',name:'Escudo',foil:true},{n:'SVK2',name:'M. Dúbravka'},{n:'SVK3',name:'P. Pekarík'},{n:'SVK4',name:'M. Škriniar'},
+    {n:'SVK5',name:'D. Vavro'},{n:'SVK6',name:'N. Gyömbér'},{n:'SVK7',name:'D. Hancko'},{n:'SVK8',name:'J. Kucka'},
+    {n:'SVK9',name:'O. Duda'},{n:'SVK10',name:'L. Haraslín'},{n:'SVK11',name:'S. Lobotka'},{n:'SVK12',name:'T. Suslov'},
+    {n:'SVK13',name:'Foto grupal'},{n:'SVK14',name:'R. Bozeník'},{n:'SVK15',name:'I. Schranz'},{n:'SVK16',name:'D. Strelec'},
+    {n:'SVK17',name:'L. Haraslín 2'},{n:'SVK18',name:'M. Bero'},{n:'SVK19',name:'P. Hrošovský'},{n:'SVK20',name:'M. Koscelník'},
+  ]},
+  {code:'NGA',name:'Nigeria',flag:'🇳🇬',group:'C',stickers:[
+    {n:'NGA1',name:'Escudo',foil:true},{n:'NGA2',name:'F. Uzoho'},{n:'NGA3',name:'A. Iwobi'},{n:'NGA4',name:'W. Troost-Ekong'},
+    {n:'NGA5',name:'O. Aina'},{n:'NGA6',name:'C. Bassey'},{n:'NGA7',name:'Z. Sanusi'},{n:'NGA8',name:'W. Ndidi'},
+    {n:'NGA9',name:'F. Onyeka'},{n:'NGA10',name:'J. Aribo'},{n:'NGA11',name:'K. Iheanacho'},{n:'NGA12',name:'S. Chukwueze'},
+    {n:'NGA13',name:'Foto grupal'},{n:'NGA14',name:'C. Dessers'},{n:'NGA15',name:'V. Osimhen'},{n:'NGA16',name:'P. Onuachu'},
+    {n:'NGA17',name:'A. Lookman'},{n:'NGA18',name:'F. Dele-Bashiru'},{n:'NGA19',name:'T. Moffi'},{n:'NGA20',name:'B. Osayi-Samuel'},
+  ]},
+  {code:'FRA',name:'Francia',flag:'🇫🇷',group:'D',stickers:[
+    {n:'FRA1',name:'Escudo',foil:true},{n:'FRA2',name:'M. Maignan'},{n:'FRA3',name:'B. Pavard'},{n:'FRA4',name:'R. Varane'},
+    {n:'FRA5',name:'D. Upamecano'},{n:'FRA6',name:'L. Hernández'},{n:'FRA7',name:'T. Hernández'},{n:'FRA8',name:'A. Tchouaméni'},
+    {n:'FRA9',name:'A. Rabiot'},{n:'FRA10',name:'A. Griezmann'},{n:'FRA11',name:'R. Kolo Muani'},{n:'FRA12',name:'M. Thuram'},
+    {n:'FRA13',name:'Foto grupal'},{n:'FRA14',name:'W. Saliba'},{n:'FRA15',name:'O. Dembélé'},{n:'FRA16',name:'O. Giroud'},
+    {n:'FRA17',name:'K. Mbappé',foil:true},{n:'FRA18',name:'C. Nkunku'},{n:'FRA19',name:'I. Konaté'},{n:'FRA20',name:'E. Camavinga'},
+  ]},
+  {code:'PER',name:'Perú',flag:'🇵🇪',group:'D',stickers:[
+    {n:'PER1',name:'Escudo',foil:true},{n:'PER2',name:'P. Gallese'},{n:'PER3',name:'L. Advíncula'},{n:'PER4',name:'A. Callens'},
+    {n:'PER5',name:'C. Zambrano'},{n:'PER6',name:'M. Araujo'},{n:'PER7',name:'M. López'},{n:'PER8',name:'Y. Yotún'},
+    {n:'PER9',name:'R. Tapia'},{n:'PER10',name:'S. Peña'},{n:'PER11',name:'E. Flores'},{n:'PER12',name:'C. Cueva'},
+    {n:'PER13',name:'Foto grupal'},{n:'PER14',name:'A. Carrillo'},{n:'PER15',name:'R. Ruidíaz'},{n:'PER16',name:'Lapadula'},
+    {n:'PER17',name:'P. Guerrero'},{n:'PER18',name:'B. Reyna'},{n:'PER19',name:'P. Quispe'},{n:'PER20',name:'A. Valera'},
+  ]},
+  {code:'ECU',name:'Ecuador',flag:'🇪🇨',group:'D',stickers:[
+    {n:'ECU1',name:'Escudo',foil:true},{n:'ECU2',name:'H. Galíndez'},{n:'ECU3',name:'Á. Preciado'},{n:'ECU4',name:'P. Hincapié'},
+    {n:'ECU5',name:'R. Arboleda'},{n:'ECU6',name:'P. Estupiñán'},{n:'ECU7',name:'F. Torres'},{n:'ECU8',name:'C. Gruezo'},
+    {n:'ECU9',name:'M. Caicedo'},{n:'ECU10',name:'A. Franco'},{n:'ECU11',name:'G. Plata'},{n:'ECU12',name:'Á. Mena'},
+    {n:'ECU13',name:'Foto grupal'},{n:'ECU14',name:'E. Valencia'},{n:'ECU15',name:'M. Estrada'},{n:'ECU16',name:'K. Rodríguez'},
+    {n:'ECU17',name:'J. Sarmiento'},{n:'ECU18',name:'K. Páez'},{n:'ECU19',name:'B. Castillo'},{n:'ECU20',name:'L. Campana'},
+  ]},
+  {code:'ESP',name:'España',flag:'🇪🇸',group:'E',stickers:[
+    {n:'ESP1',name:'Escudo',foil:true},{n:'ESP2',name:'U. Simón'},{n:'ESP3',name:'J. Navas'},{n:'ESP4',name:'P. Cubarsí'},
+    {n:'ESP5',name:'A. Laporte'},{n:'ESP6',name:'A. Balde'},{n:'ESP7',name:'D. Carvajal'},{n:'ESP8',name:'Pedri'},
+    {n:'ESP9',name:'Gavi'},{n:'ESP10',name:'Rodri'},{n:'ESP11',name:'N. Williams'},{n:'ESP12',name:'L. Yamal',foil:true},
+    {n:'ESP13',name:'Foto grupal'},{n:'ESP14',name:'Á. Morata'},{n:'ESP15',name:'F. Torres'},{n:'ESP16',name:'D. Olmo'},
+    {n:'ESP17',name:'F. Ruiz'},{n:'ESP18',name:'Joselu'},{n:'ESP19',name:'M. Oyarzabal'},{n:'ESP20',name:'Y. Pino'},
+  ]},
+  {code:'ALG',name:'Argelia',flag:'🇩🇿',group:'E',stickers:[
+    {n:'ALG1',name:'Escudo',foil:true},{n:'ALG2',name:"R. M'Bolhi"},{n:'ALG3',name:'A. Mandi'},{n:'ALG4',name:'R. Bensebaini'},
+    {n:'ALG5',name:'D. Benlamri'},{n:'ALG6',name:'Y. Atal'},{n:'ALG7',name:'M. Zerkane'},{n:'ALG8',name:'S. Feghouli'},
+    {n:'ALG9',name:'I. Bennacer'},{n:'ALG10',name:'R. Zerrouki'},{n:'ALG11',name:'R. Mahrez'},{n:'ALG12',name:'B. Bounedjah'},
+    {n:'ALG13',name:'Foto grupal'},{n:'ALG14',name:'A. Delort'},{n:'ALG15',name:'I. Slimani'},{n:'ALG16',name:'Y. Brahimi'},
+    {n:'ALG17',name:'A. Ounas'},{n:'ALG18',name:'M. Tahrat'},{n:'ALG19',name:'D. Belmadi'},{n:'ALG20',name:'F. Boulaya'},
+  ]},
+  {code:'SVN',name:'Eslovenia',flag:'🇸🇮',group:'E',stickers:[
+    {n:'SVN1',name:'Escudo',foil:true},{n:'SVN2',name:'Jan Oblak'},{n:'SVN3',name:'M. Blažič'},{n:'SVN4',name:'A. Set'},
+    {n:'SVN5',name:'J. Bijol'},{n:'SVN6',name:'P. Stojanovic'},{n:'SVN7',name:'T. Horvat'},{n:'SVN8',name:'R. Kronaveter'},
+    {n:'SVN9',name:'S. Lovrić'},{n:'SVN10',name:'J. Iličić'},{n:'SVN11',name:'A. Šporar'},{n:'SVN12',name:'A. Gnezda Čerin'},
+    {n:'SVN13',name:'Foto grupal'},{n:'SVN14',name:'B. Šeško'},{n:'SVN15',name:'Ž. Vipotnik'},{n:'SVN16',name:'L. Gutman'},
+    {n:'SVN17',name:'L. Zahović'},{n:'SVN18',name:'Ž. Karničnik'},{n:'SVN19',name:'E. Janža'},{n:'SVN20',name:'T. Mlakar'},
+  ]},
+  {code:'HON',name:'Honduras',flag:'🇭🇳',group:'E',stickers:[
+    {n:'HON1',name:'Escudo',foil:true},{n:'HON2',name:'L. López'},{n:'HON3',name:'M. Santos'},{n:'HON4',name:'J. Rougier'},
+    {n:'HON5',name:'D. Maldonado'},{n:'HON6',name:'C. Meléndez'},{n:'HON7',name:'B. Acosta'},{n:'HON8',name:'D. Flores'},
+    {n:'HON9',name:'A. Elis'},{n:'HON10',name:'J. Rosales'},{n:'HON11',name:'A. Lozano'},{n:'HON12',name:'E. Rodríguez'},
+    {n:'HON13',name:'Foto grupal'},{n:'HON14',name:'R. Quioto'},{n:'HON15',name:'J. Benguché'},{n:'HON16',name:'D. Rodríguez'},
+    {n:'HON17',name:'L. Palma'},{n:'HON18',name:'R. Rivas'},{n:'HON19',name:'K. Arriaga'},{n:'HON20',name:'Solano'},
+  ]},
+  {code:'BRA',name:'Brasil',flag:'🇧🇷',group:'F',stickers:[
+    {n:'BRA1',name:'Escudo',foil:true},{n:'BRA2',name:'Alisson'},{n:'BRA3',name:'É. Militão'},{n:'BRA4',name:'Marquinhos'},
+    {n:'BRA5',name:'Bremer'},{n:'BRA6',name:'A. Sandro'},{n:'BRA7',name:'Danilo'},{n:'BRA8',name:'Casemiro'},
+    {n:'BRA9',name:'B. Guimarães'},{n:'BRA10',name:'L. Paquetá'},{n:'BRA11',name:'Endrick'},{n:'BRA12',name:'Rodrygo'},
+    {n:'BRA13',name:'Foto grupal'},{n:'BRA14',name:'Vinícius Jr.',foil:true},{n:'BRA15',name:'Raphinha'},{n:'BRA16',name:'G. Martinelli'},
+    {n:'BRA17',name:'Richarlison'},{n:'BRA18',name:'G. Jesus'},{n:'BRA19',name:'Antony'},{n:'BRA20',name:'Savinho'},
+  ]},
+  {code:'SUI',name:'Suiza',flag:'🇨🇭',group:'F',stickers:[
+    {n:'SUI1',name:'Escudo',foil:true},{n:'SUI2',name:'Y. Sommer'},{n:'SUI3',name:'M. Akanji'},{n:'SUI4',name:'N. Elvedi'},
+    {n:'SUI5',name:'F. Schär'},{n:'SUI6',name:'R. Rodríguez'},{n:'SUI7',name:'S. Widmer'},{n:'SUI8',name:'G. Xhaka'},
+    {n:'SUI9',name:'R. Freuler'},{n:'SUI10',name:'D. Zakaria'},{n:'SUI11',name:'X. Shaqiri'},{n:'SUI12',name:'D. Ndoye'},
+    {n:'SUI13',name:'Foto grupal'},{n:'SUI14',name:'B. Embolo'},{n:'SUI15',name:'Z. Amdouni'},{n:'SUI16',name:'R. Steffen'},
+    {n:'SUI17',name:'A. Jashari'},{n:'SUI18',name:'M. Aebischer'},{n:'SUI19',name:'F. Rieder'},{n:'SUI20',name:'K. Duah'},
+  ]},
+  {code:'ANG',name:'Angola',flag:'🇦🇴',group:'F',stickers:[
+    {n:'ANG1',name:'Escudo',foil:true},{n:'ANG2',name:'Igo'},{n:'ANG3',name:'Bastos'},{n:'ANG4',name:'Manucho'},
+    {n:'ANG5',name:'W. Fonseca'},{n:'ANG6',name:'Massunguna'},{n:'ANG7',name:'Fredy'},{n:'ANG8',name:'Geraldo'},
+    {n:'ANG9',name:'Z. Luvumbo'},{n:'ANG10',name:'Herenilson'},{n:'ANG11',name:'Mabululu'},{n:'ANG12',name:'G. Dala'},
+    {n:'ANG13',name:'Foto grupal'},{n:'ANG14',name:'W. Eduardo'},{n:'ANG15',name:'M. Nzola'},{n:'ANG16',name:'Vitinho'},
+    {n:'ANG17',name:'Pelé A.'},{n:'ANG18',name:'Cafú'},{n:'ANG19',name:'Buta'},{n:'ANG20',name:'Gilberto'},
+  ]},
+  {code:'HAI',name:'Haití',flag:'🇭🇹',group:'F',stickers:[
+    {n:'HAI1',name:'Escudo',foil:true},{n:'HAI2',name:'J. Placide'},{n:'HAI3',name:'M. Jérôme'},{n:'HAI4',name:'S. Picard'},
+    {n:'HAI5',name:'C. Arcus'},{n:'HAI6',name:'D. Étienne'},{n:'HAI7',name:'F. Pierrot'},{n:'HAI8',name:'W. Guerrier'},
+    {n:'HAI9',name:'D. Nazon'},{n:'HAI10',name:'J-E. Maurice'},{n:'HAI11',name:'R. Damus'},{n:'HAI12',name:'K. Belfort'},
+    {n:'HAI13',name:'Foto grupal'},{n:'HAI14',name:'F. Louis'},{n:'HAI15',name:'S. Saba'},{n:'HAI16',name:'C. Antoine'},
+    {n:'HAI17',name:'N. Rodrigues'},{n:'HAI18',name:'I. Borgelin'},{n:'HAI19',name:'Z. Herivaux'},{n:'HAI20',name:'O. Timothée'},
+  ]},
+  {code:'GER',name:'Alemania',flag:'🇩🇪',group:'G',stickers:[
+    {n:'GER1',name:'Escudo',foil:true},{n:'GER2',name:'M. Neuer'},{n:'GER3',name:'J. Kimmich'},{n:'GER4',name:'A. Rüdiger'},
+    {n:'GER5',name:'N. Schlotterbeck'},{n:'GER6',name:'D. Raum'},{n:'GER7',name:'R. Gosens'},{n:'GER8',name:'L. Goretzka'},
+    {n:'GER9',name:'I. Gündogan'},{n:'GER10',name:'T. Müller'},{n:'GER11',name:'L. Sané'},{n:'GER12',name:'S. Gnabry'},
+    {n:'GER13',name:'Foto grupal'},{n:'GER14',name:'K. Havertz'},{n:'GER15',name:'T. Werner'},{n:'GER16',name:'N. Füllkrug'},
+    {n:'GER17',name:'F. Wirtz'},{n:'GER18',name:'J. Musiala'},{n:'GER19',name:'D. Undav'},{n:'GER20',name:'C. Führich'},
+  ]},
+  {code:'AUS',name:'Australia',flag:'🇦🇺',group:'G',stickers:[
+    {n:'AUS1',name:'Escudo',foil:true},{n:'AUS2',name:'M. Ryan'},{n:'AUS3',name:'M. Degenek'},{n:'AUS4',name:'K. Rowles'},
+    {n:'AUS5',name:'H. Souttar'},{n:'AUS6',name:'A. Behich'},{n:'AUS7',name:'J. King'},{n:'AUS8',name:'J. Irvine'},
+    {n:'AUS9',name:'R. McGree'},{n:'AUS10',name:'A. Mooy'},{n:'AUS11',name:'A. Hrustic'},{n:'AUS12',name:'C. Goodwin'},
+    {n:'AUS13',name:'Foto grupal'},{n:'AUS14',name:'A. Mabil'},{n:'AUS15',name:'M. Boyle'},{n:'AUS16',name:'J. Cummings'},
+    {n:'AUS17',name:'M. Duke'},{n:'AUS18',name:'G. Kuol'},{n:'AUS19',name:'M. Leckie'},{n:'AUS20',name:'M. Tilio'},
+  ]},
+  {code:'PHI',name:'Filipinas',flag:'🇵🇭',group:'G',stickers:[
+    {n:'PHI1',name:'Escudo',foil:true},{n:'PHI2',name:'M. Falkesgaard'},{n:'PHI3',name:'J. Janssen'},{n:'PHI4',name:'D. Suzuki'},
+    {n:'PHI5',name:'J. Bedic'},{n:'PHI6',name:'S. Schröck'},{n:'PHI7',name:'P. Reichelt'},{n:'PHI8',name:'OJ Porteria'},
+    {n:'PHI9',name:'C. de Murga'},{n:'PHI10',name:'S. Rublico'},{n:'PHI11',name:'I. Ramsay'},{n:'PHI12',name:'B. Marañón'},
+    {n:'PHI13',name:'Foto grupal'},{n:'PHI14',name:'D. Macatee'},{n:'PHI15',name:'M. Ott'},{n:'PHI16',name:'S. Reyes'},
+    {n:'PHI17',name:'J. Patiño'},{n:'PHI18',name:'L. Schulz'},{n:'PHI19',name:'A. Alcantara'},{n:'PHI20',name:'JP Strauss'},
+  ]},
+  {code:'GHA',name:'Ghana',flag:'🇬🇭',group:'G',stickers:[
+    {n:'GHA1',name:'Escudo',foil:true},{n:'GHA2',name:'L. Ati Zigi'},{n:'GHA3',name:'A. Yiadom'},{n:'GHA4',name:'D. Amartey'},
+    {n:'GHA5',name:'A. Djiku'},{n:'GHA6',name:'G. Mensah'},{n:'GHA7',name:'B. Rahman'},{n:'GHA8',name:'T. Partey'},
+    {n:'GHA9',name:'M. Kudus'},{n:'GHA10',name:'A. Ayew'},{n:'GHA11',name:'J. Ayew'},{n:'GHA12',name:'K. Sulemana'},
+    {n:'GHA13',name:'Foto grupal'},{n:'GHA14',name:'O. Bukari'},{n:'GHA15',name:'A. Semenyo'},{n:'GHA16',name:'I. Williams'},
+    {n:'GHA17',name:'T. Fosu'},{n:'GHA18',name:'K. Asamoah'},{n:'GHA19',name:'S. Mohammed'},{n:'GHA20',name:'E. Nuamah'},
+  ]},
+  {code:'JPN',name:'Japón',flag:'🇯🇵',group:'H',stickers:[
+    {n:'JPN1',name:'Escudo',foil:true},{n:'JPN2',name:'S. Gonda'},{n:'JPN3',name:'H. Sakai'},{n:'JPN4',name:'M. Yoshida'},
+    {n:'JPN5',name:'K. Itakura'},{n:'JPN6',name:'Y. Nagatomo'},{n:'JPN7',name:'R. Hirakawa'},{n:'JPN8',name:'W. Endo'},
+    {n:'JPN9',name:'H. Morita'},{n:'JPN10',name:'D. Kamada'},{n:'JPN11',name:'J. Ito'},{n:'JPN12',name:'K. Mitoma'},
+    {n:'JPN13',name:'Foto grupal'},{n:'JPN14',name:'R. Doan'},{n:'JPN15',name:'T. Asano'},{n:'JPN16',name:'A. Ueda'},
+    {n:'JPN17',name:'T. Kubo'},{n:'JPN18',name:'S. Ito'},{n:'JPN19',name:'A. Tanaka'},{n:'JPN20',name:'Y. Soma'},
+  ]},
+  {code:'CRC',name:'Costa Rica',flag:'🇨🇷',group:'H',stickers:[
+    {n:'CRC1',name:'Escudo',foil:true},{n:'CRC2',name:'K. Navas'},{n:'CRC3',name:'B. Ruiz'},{n:'CRC4',name:'F. Calvo'},
+    {n:'CRC5',name:'O. Duarte'},{n:'CRC6',name:'JP Vargas'},{n:'CRC7',name:'R. Matarrita'},{n:'CRC8',name:'C. Borges'},
+    {n:'CRC9',name:'Y. Tejeda'},{n:'CRC10',name:'R. Gómez'},{n:'CRC11',name:'A. Contreras'},{n:'CRC12',name:'J. Campbell'},
+    {n:'CRC13',name:'Foto grupal'},{n:'CRC14',name:'B. Aguilera'},{n:'CRC15',name:'M. Ugalde'},{n:'CRC16',name:'Á. Zamora'},
+    {n:'CRC17',name:'J. Moya'},{n:'CRC18',name:'J. Venegas'},{n:'CRC19',name:'R. Leal'},{n:'CRC20',name:'G. Torres'},
+  ]},
+  {code:'SRB',name:'Serbia',flag:'🇷🇸',group:'H',stickers:[
+    {n:'SRB1',name:'Escudo',foil:true},{n:'SRB2',name:'V. Milinković-S.'},{n:'SRB3',name:'N. Milenković'},{n:'SRB4',name:'S. Pavlović'},
+    {n:'SRB5',name:'S. Mitrović'},{n:'SRB6',name:'S. Babić'},{n:'SRB7',name:'F. Mladenović'},{n:'SRB8',name:'N. Gudelj'},
+    {n:'SRB9',name:'S. Milinković-S2'},{n:'SRB10',name:'D. Tadić'},{n:'SRB11',name:'A. Živković'},{n:'SRB12',name:'F. Kostić'},
+    {n:'SRB13',name:'Foto grupal'},{n:'SRB14',name:'L. Jović'},{n:'SRB15',name:'A. Mitrović'},{n:'SRB16',name:'D. Vlahović'},
+    {n:'SRB17',name:'S. Lukić'},{n:'SRB18',name:'I. Ilić'},{n:'SRB19',name:'S. Eraković'},{n:'SRB20',name:'M. Arnautović'},
+  ]},
+  {code:'VEN',name:'Venezuela',flag:'🇻🇪',group:'H',stickers:[
+    {n:'VEN1',name:'Escudo',foil:true},{n:'VEN2',name:'W. Faríñez'},{n:'VEN3',name:'W. Ángel'},{n:'VEN4',name:'N. Ferraresi'},
+    {n:'VEN5',name:'J. Chancellor'},{n:'VEN6',name:'R. Feltscher'},{n:'VEN7',name:'R. Hernández'},{n:'VEN8',name:'Y. Herrera'},
+    {n:'VEN9',name:'T. Rincón'},{n:'VEN10',name:'Y. Soteldo'},{n:'VEN11',name:'S. Córdova'},{n:'VEN12',name:'D. Machís'},
+    {n:'VEN13',name:'Foto grupal'},{n:'VEN14',name:'S. Rondón'},{n:'VEN15',name:'J. Martínez'},{n:'VEN16',name:'J. Hurtado'},
+    {n:'VEN17',name:'A. Peñaranda'},{n:'VEN18',name:'E. Ramírez'},{n:'VEN19',name:'E. Castillo'},{n:'VEN20',name:'C. Cásseres'},
+  ]},
+  {code:'BEL',name:'Bélgica',flag:'🇧🇪',group:'I',stickers:[
+    {n:'BEL1',name:'Escudo',foil:true},{n:'BEL2',name:'T. Courtois'},{n:'BEL3',name:'T. Alderweireld'},{n:'BEL4',name:'J. Vertonghen'},
+    {n:'BEL5',name:'T. Vermaelen'},{n:'BEL6',name:'Y. Carrasco'},{n:'BEL7',name:'T. Castagne'},{n:'BEL8',name:'A. Witsel'},
+    {n:'BEL9',name:'K. De Bruyne'},{n:'BEL10',name:'T. Hazard'},{n:'BEL11',name:'E. Hazard'},{n:'BEL12',name:'T. Meunier'},
+    {n:'BEL13',name:'Foto grupal'},{n:'BEL14',name:'R. Lukaku'},{n:'BEL15',name:'D. Origi'},{n:'BEL16',name:'D. Mertens'},
+    {n:'BEL17',name:'L. Openda'},{n:'BEL18',name:'J. Doku'},{n:'BEL19',name:'A. Onana'},{n:'BEL20',name:'C. De Ketelaere'},
+  ]},
+  {code:'SCO',name:'Escocia',flag:'🏴󠁧󠁢󠁳󠁣󠁴󠁿',group:'I',stickers:[
+    {n:'SCO1',name:'Escudo',foil:true},{n:'SCO2',name:'C. Gordon'},{n:'SCO3',name:'A. Robertson'},{n:'SCO4',name:'G. Hanley'},
+    {n:'SCO5',name:'K. Tierney'},{n:"SCO6",name:"S. O'Donnell"},{n:'SCO7',name:'S. McTominay'},{n:'SCO8',name:'B. Gilmour'},
+    {n:'SCO9',name:'C. McGregor'},{n:'SCO10',name:'R. Christie'},{n:'SCO11',name:'J. McGinn'},{n:'SCO12',name:'S. Armstrong'},
+    {n:'SCO13',name:'Foto grupal'},{n:'SCO14',name:'L. Shankland'},{n:'SCO15',name:'L. Dykes'},{n:'SCO16',name:'K. Nisbet'},
+    {n:'SCO17',name:'R. Porteous'},{n:'SCO18',name:'L. Cooper'},{n:'SCO19',name:'B. Doak'},{n:'SCO20',name:'J. Brown'},
+  ]},
+  {code:'GUA',name:'Guatemala',flag:'🇬🇹',group:'I',stickers:[
+    {n:'GUA1',name:'Escudo',foil:true},{n:'GUA2',name:'N. Hagen'},{n:'GUA3',name:'C. Mejía'},{n:'GUA4',name:'A. Galindo'},
+    {n:'GUA5',name:'E. Bulux'},{n:'GUA6',name:'W. Rivero'},{n:'GUA7',name:'J. Aparicio'},{n:'GUA8',name:'B. Jiménez'},
+    {n:'GUA9',name:'R. Saravia'},{n:'GUA10',name:'K. Ruano'},{n:'GUA11',name:'J. Arreola'},{n:'GUA12',name:'JC Pinto'},
+    {n:'GUA13',name:'Foto grupal'},{n:'GUA14',name:'J. Contreras'},{n:'GUA15',name:'R. Rubín'},{n:'GUA16',name:'D. Reyes'},
+    {n:'GUA17',name:'C. Caballero'},{n:'GUA18',name:'A. Lezcano'},{n:'GUA19',name:'A. Márquez'},{n:'GUA20',name:'D. Lom'},
+  ]},
+  {code:'UZB',name:'Uzbekistán',flag:'🇺🇿',group:'I',stickers:[
+    {n:'UZB1',name:'Escudo',foil:true},{n:'UZB2',name:'U. Yusupov'},{n:'UZB3',name:'F. Toshmatov'},{n:'UZB4',name:'S. Nasrullaev'},
+    {n:'UZB5',name:'U. Eshmurodov'},{n:'UZB6',name:'H. Aliqulov'},{n:'UZB7',name:'R. Ashurmatov'},{n:'UZB8',name:'K. Alijonov'},
+    {n:'UZB9',name:'A. Khusanov'},{n:'UZB10',name:'O. Hamrobekov'},{n:'UZB11',name:'O. Shukurov'},{n:'UZB12',name:'J. Iskanderov'},
+    {n:'UZB13',name:'Foto grupal'},{n:'UZB14',name:'E. Shomurodov'},{n:'UZB15',name:'J. Masharipov'},{n:'UZB16',name:'D. Khamdamov'},
+    {n:'UZB17',name:'E. Suyunov'},{n:'UZB18',name:'M. Sobirov'},{n:'UZB19',name:'D. Boymurodov'},{n:'UZB20',name:'B. Abdixoliqov'},
+  ]},
+  {code:'ENG',name:'Inglaterra',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',group:'J',stickers:[
+    {n:'ENG1',name:'Escudo',foil:true},{n:'ENG2',name:'J. Pickford'},{n:'ENG3',name:'K. Walker'},{n:'ENG4',name:'J. Stones'},
+    {n:'ENG5',name:'H. Maguire'},{n:'ENG6',name:'L. Shaw'},{n:'ENG7',name:'K. Trippier'},{n:'ENG8',name:'D. Rice'},
+    {n:'ENG9',name:'J. Bellingham',foil:true},{n:'ENG10',name:'P. Foden'},{n:'ENG11',name:'B. Saka'},{n:'ENG12',name:'M. Rashford'},
+    {n:'ENG13',name:'Foto grupal'},{n:'ENG14',name:'H. Kane'},{n:'ENG15',name:'R. Sterling'},{n:'ENG16',name:'J. Grealish'},
+    {n:'ENG17',name:'O. Watkins'},{n:'ENG18',name:'E. Eze'},{n:'ENG19',name:'C. Palmer'},{n:'ENG20',name:'A. Gordon'},
+  ]},
+  {code:'IRA',name:'Irak',flag:'🇮🇶',group:'J',stickers:[
+    {n:'IRA1',name:'Escudo',foil:true},{n:'IRA2',name:'J. Hassan'},{n:'IRA3',name:'B. Rasan'},{n:'IRA4',name:'A. Adnan'},
+    {n:'IRA5',name:'R. Sulaka'},{n:'IRA6',name:'H. Ali'},{n:'IRA7',name:'A. Ibrahim'},{n:'IRA8',name:'A. Abbas'},
+    {n:'IRA9',name:'A. Attwan'},{n:'IRA10',name:'S. Natiq'},{n:'IRA11',name:'A. Hussein'},{n:'IRA12',name:'M. Ali'},
+    {n:'IRA13',name:'Foto grupal'},{n:'IRA14',name:'A. Yasin'},{n:'IRA15',name:'M. Ali 2'},{n:'IRA16',name:'I. Bayesh'},
+    {n:'IRA17',name:'K. Mohammed'},{n:'IRA18',name:'O. Rashid'},{n:'IRA19',name:'J. Meram'},{n:'IRA20',name:'D. Ismail'},
+  ]},
+  {code:'PAN',name:'Panamá',flag:'🇵🇦',group:'J',stickers:[
+    {n:'PAN1',name:'Escudo',foil:true},{n:'PAN2',name:'L. Mejía'},{n:'PAN3',name:'E. Davis'},{n:'PAN4',name:'F. Escobar'},
+    {n:'PAN5',name:'R. Miller'},{n:'PAN6',name:'H. Cummings'},{n:'PAN7',name:'A. Godoy'},{n:'PAN8',name:'E. Bárcenas'},
+    {n:'PAN9',name:'A. Carrasquilla'},{n:'PAN10',name:'C. Blackman'},{n:'PAN11',name:'G. Torres'},{n:'PAN12',name:'A. Ayarza'},
+    {n:'PAN13',name:'Foto grupal'},{n:'PAN14',name:'R. Blackburn'},{n:'PAN15',name:'I. Díaz'},{n:'PAN16',name:'C. Waterman'},
+    {n:'PAN17',name:'M. Murillo'},{n:'PAN18',name:'F. Góndola'},{n:'PAN19',name:'E. Guerrero'},{n:'PAN20',name:'A. Godoy 2'},
+  ]},
+  {code:'POR',name:'Portugal',flag:'🇵🇹',group:'K',stickers:[
+    {n:'POR1',name:'Escudo',foil:true},{n:'POR2',name:'R. Patrício'},{n:'POR3',name:'D. Dalot'},{n:'POR4',name:'R. Dias'},
+    {n:'POR5',name:'Pepe'},{n:'POR6',name:'N. Mendes'},{n:'POR7',name:'J. Cancelo'},{n:'POR8',name:'W. Carvalho'},
+    {n:'POR9',name:'R. Neves'},{n:'POR10',name:'Vitinha'},{n:'POR11',name:'B. Silva'},{n:'POR12',name:'R. Leão'},
+    {n:'POR13',name:'Foto grupal'},{n:'POR14',name:'J. Félix'},{n:'POR15',name:'G. Ramos'},{n:'POR16',name:'A. Silva'},
+    {n:'POR17',name:'C. Ronaldo',foil:true},{n:'POR18',name:'D. Jota'},{n:'POR19',name:'P. Neto'},{n:'POR20',name:'R. Lopes'},
+  ]},
+  {code:'COL',name:'Colombia',flag:'🇨🇴',group:'K',stickers:[
+    {n:'COL1',name:'Escudo',foil:true},{n:'COL2',name:'C. Vargas'},{n:'COL3',name:'D. Ospina'},{n:'COL4',name:'D. Sánchez'},
+    {n:'COL5',name:'Y. Mina'},{n:'COL6',name:'D. Muñoz'},{n:'COL7',name:'J. Mojica'},{n:'COL8',name:'J. Lucumí'},
+    {n:'COL9',name:'S. Arias'},{n:'COL10',name:'J. Lerma'},{n:'COL11',name:'K. Castaño'},{n:'COL12',name:'R. Ríos'},
+    {n:'COL13',name:'Foto grupal'},{n:'COL14',name:'James R.',foil:true},{n:'COL15',name:'JF Quintero'},{n:'COL16',name:'J. Carrascal'},
+    {n:'COL17',name:'J. Arias'},{n:'COL18',name:'J. Córdoba'},{n:'COL19',name:'Luis Díaz',foil:true},{n:'COL20',name:'L. Suárez'},
+  ]},
+  {code:'COD',name:'RD del Congo',flag:'🇨🇩',group:'K',stickers:[
+    {n:'COD1',name:'Escudo',foil:true},{n:'COD2',name:'J. Kiassumbua'},{n:'COD3',name:'C. Mbemba'},{n:'COD4',name:'E. Meschack'},
+    {n:'COD5',name:'Y. Wissa'},{n:'COD6',name:'S. Katompa'},{n:'COD7',name:'S. Bastien'},{n:'COD8',name:'A. Bouka M.'},
+    {n:'COD9',name:'C. Bakambu'},{n:'COD10',name:'J. Bolingi'},{n:'COD11',name:'T. Bongonda'},{n:'COD12',name:'N. Kebano'},
+    {n:'COD13',name:'Foto grupal'},{n:'COD14',name:'D. Lukébakio'},{n:'COD15',name:'A. Zola'},{n:'COD16',name:'F. Mubele'},
+    {n:'COD17',name:'H. Luvumbo'},{n:'COD18',name:'PJ Mpoku'},{n:'COD19',name:'M. Tisserand'},{n:'COD20',name:'A. Masuaku'},
+  ]},
+  {code:'URU',name:'Uruguay',flag:'🇺🇾',group:'L',stickers:[
+    {n:'URU1',name:'Escudo',foil:true},{n:'URU2',name:'F. Muslera'},{n:'URU3',name:'D. Godín'},{n:'URU4',name:'R. Araújo'},
+    {n:'URU5',name:'M. Olivera'},{n:'URU6',name:'JM Giménez'},{n:'URU7',name:'M. Cáceres'},{n:'URU8',name:'F. Valverde'},
+    {n:'URU9',name:'L. Torreira'},{n:'URU10',name:'R. Bentancur'},{n:'URU11',name:'M. Ugarte'},{n:'URU12',name:'G. De Arrascaeta'},
+    {n:'URU13',name:'Foto grupal'},{n:'URU14',name:'D. Núñez'},{n:'URU15',name:'L. Suárez'},{n:'URU16',name:'E. Cavani'},
+    {n:'URU17',name:'F. Torres'},{n:'URU18',name:'G. Pereiro'},{n:'URU19',name:'B. Rodríguez'},{n:'URU20',name:'N. de la Cruz'},
+  ]},
+  {code:'CZE',name:'Rep. Checa',flag:'🇨🇿',group:'L',stickers:[
+    {n:'CZE1',name:'Escudo',foil:true},{n:'CZE2',name:'J. Pavlenka'},{n:'CZE3',name:'V. Coufal'},{n:'CZE4',name:'T. Holeš'},
+    {n:'CZE5',name:'D. Zima'},{n:'CZE6',name:'J. Zelený'},{n:'CZE7',name:'O. Čelůstka'},{n:'CZE8',name:'L. Provod'},
+    {n:'CZE9',name:'T. Souček'},{n:'CZE10',name:'A. Král'},{n:'CZE11',name:'O. Lingr'},{n:'CZE12',name:'P. Schick'},
+    {n:'CZE13',name:'Foto grupal'},{n:'CZE14',name:'A. Hložek'},{n:'CZE15',name:'L. Krejčí'},{n:'CZE16',name:'J. Kuchta'},
+    {n:'CZE17',name:'L. Sadílek'},{n:'CZE18',name:'J. Jankto'},{n:'CZE19',name:'D. Doudera'},{n:'CZE20',name:'M. Bartoš'},
+  ]},
+  {code:'TUR',name:'Turquía',flag:'🇹🇷',group:'L',stickers:[
+    {n:'TUR1',name:'Escudo',foil:true},{n:'TUR2',name:'A. Bayındır'},{n:'TUR3',name:'Z. Çelik'},{n:'TUR4',name:'M. Demiral'},
+    {n:'TUR5',name:'Ç. Söyüncü'},{n:'TUR6',name:'F. Kadıoğlu'},{n:'TUR7',name:'M. Müldür'},{n:'TUR8',name:'H. Çalhanoğlu'},
+    {n:'TUR9',name:'O. Kökçü'},{n:'TUR10',name:'S. Özcan'},{n:'TUR11',name:'B. Yılmaz'},{n:'TUR12',name:'A. Güler'},
+    {n:'TUR13',name:'Foto grupal'},{n:'TUR14',name:'K. Aktürkoğlu'},{n:'TUR15',name:'C. Tosun'},{n:'TUR16',name:'B. Ceran'},
+    {n:'TUR17',name:'S. Aziz'},{n:'TUR18',name:'H. Dervişoğlu'},{n:'TUR19',name:'U. Nayir'},{n:'TUR20',name:'Y. Yazıcı'},
+  ]},
+  {code:'IDN',name:'Indonesia',flag:'🇮🇩',group:'L',stickers:[
+    {n:'IDN1',name:'Escudo',foil:true},{n:'IDN2',name:'E. Ari'},{n:'IDN3',name:'S. Walsh'},{n:'IDN4',name:'R. Ridho'},
+    {n:'IDN5',name:'J. Hubner'},{n:'IDN6',name:'J. Amat'},{n:'IDN7',name:'S. Pattynama'},{n:'IDN8',name:'M. Klok'},
+    {n:'IDN9',name:'I. Jenner'},{n:'IDN10',name:'T. Haye'},{n:'IDN11',name:'N. Tjoe-A-On'},{n:'IDN12',name:'R. Struick'},
+    {n:'IDN13',name:'Foto grupal'},{n:'IDN14',name:'H. Caraka'},{n:'IDN15',name:'R. Sananta'},{n:'IDN16',name:'E. Maulana'},
+    {n:'IDN17',name:'W. Sulaeman'},{n:'IDN18',name:'M. Ferdinan'},{n:'IDN19',name:'J. Idzes'},{n:'IDN20',name:'K. Diks'},
+  ]},
+  {code:'USA',name:'EE.UU.',flag:'🇺🇸',special:true,stickers:[
+    {n:'USA1',name:'Escudo',foil:true},{n:'USA2',name:'M. Freese'},{n:'USA3',name:'C. Richards'},{n:'USA4',name:'T. Ream'},
+    {n:'USA5',name:'M. McKenzie'},{n:'USA6',name:'A. Freeman'},{n:'USA7',name:'A. Robinson'},{n:'USA8',name:'T. Adams'},
+    {n:'USA9',name:'T. Tessmann'},{n:'USA10',name:'W. McKennie'},{n:'USA11',name:'C. Roldan'},{n:'USA12',name:'T. Weah'},
+    {n:'USA13',name:'Foto grupal'},{n:'USA14',name:'D. Luna'},{n:'USA15',name:'M. Tillman'},{n:'USA16',name:'C. Pulisic',foil:true},
+    {n:'USA17',name:'B. Aaronson'},{n:'USA18',name:'R. Pepi'},{n:'USA19',name:'H. Wright'},{n:'USA20',name:'F. Balogun'},
+  ]},
+  {code:'CAN',name:'Canadá',flag:'🇨🇦',special:true,stickers:[
+    {n:'CAN1',name:'Escudo',foil:true},{n:'CAN2',name:'M. Crépeau'},{n:'CAN3',name:'R. Laryea'},{n:'CAN4',name:'K. Miller'},
+    {n:'CAN5',name:'S. Vitória'},{n:'CAN6',name:'D. Cornelius'},{n:'CAN7',name:'A. Johnston'},{n:'CAN8',name:'A. Hutchinson'},
+    {n:'CAN9',name:'J. Osorio'},{n:'CAN10',name:'MA Kaye'},{n:'CAN11',name:'T. Buchanan'},{n:'CAN12',name:'J. Hoilett'},
+    {n:'CAN13',name:'Foto grupal'},{n:'CAN14',name:'L. Cavallini'},{n:'CAN15',name:'C. Larin'},{n:'CAN16',name:'A. Davies',foil:true},
+    {n:'CAN17',name:'J. David'},{n:'CAN18',name:'L. Millar'},{n:'CAN19',name:'A. Ahmed'},{n:'CAN20',name:'I. Koné'},
+  ]},
+  {code:'BIH',name:'Bosnia Herz.',flag:'🇧🇦',special:true,stickers:[
+    {n:'BIH1',name:'Escudo',foil:true},{n:'BIH2',name:'J. Handanović'},{n:'BIH3',name:'S. Kolašinac'},{n:'BIH4',name:'E. Bičakčić'},
+    {n:'BIH5',name:'S. Tanasić'},{n:'BIH6',name:'D. Miličević'},{n:'BIH7',name:'H. Hajradinović'},{n:'BIH8',name:'M. Pjanić'},
+    {n:'BIH9',name:'E. Višća'},{n:'BIH10',name:'E. Demirović'},{n:'BIH11',name:'A. Gojak'},{n:'BIH12',name:'S. Kolasinac'},
+    {n:'BIH13',name:'Foto grupal'},{n:'BIH14',name:'D. Šunjić'},{n:'BIH15',name:'E. Džeko'},{n:'BIH16',name:'D. Džidić'},
+    {n:'BIH17',name:'L. Menalo'},{n:'BIH18',name:'O. Šćekić'},{n:'BIH19',name:'V. Botić'},{n:'BIH20',name:'H. Duljevic'},
+  ]},
+  {code:'TUN',name:'Túnez',flag:'🇹🇳',special:true,stickers:[
+    {n:'TUN1',name:'Escudo',foil:true},{n:'TUN2',name:'A. Dahmen'},{n:'TUN3',name:'M. Talbi'},{n:'TUN4',name:'Y. Meriah'},
+    {n:'TUN5',name:'D. Bronn'},{n:'TUN6',name:'A. Maâloul'},{n:'TUN7',name:'N. Ghandri'},{n:'TUN8',name:'E. Skhiri'},
+    {n:'TUN9',name:'A. Laïdouni'},{n:'TUN10',name:'H. Mejbri'},{n:'TUN11',name:'Y. Msakni'},{n:'TUN12',name:'N. Sliti'},
+    {n:'TUN13',name:'Foto grupal'},{n:'TUN14',name:'S. Jaziri'},{n:'TUN15',name:'W. Khazri'},{n:'TUN16',name:'H. Rafia'},
+    {n:'TUN17',name:'I. Jebali'},{n:'TUN18',name:'TY Khenissi'},{n:'TUN19',name:'A. Zorgane'},{n:'TUN20',name:'M. Drager'},
+  ]},
+  {code:'CIV',name:'Costa de Marfil',flag:'🇨🇮',special:true,stickers:[
+    {n:'CIV1',name:'Escudo',foil:true},{n:'CIV2',name:'BA Sangaré'},{n:'CIV3',name:'W. Singo'},{n:'CIV4',name:'E. Bailly'},
+    {n:'CIV5',name:'S. Aurier'},{n:'CIV6',name:'S. Deli'},{n:'CIV7',name:'G. Konan'},{n:'CIV8',name:'JM Seri'},
+    {n:'CIV9',name:'I. Sangaré'},{n:'CIV10',name:'F. Kessié'},{n:'CIV11',name:'C. Kouamé'},{n:'CIV12',name:'S. Haller'},
+    {n:'CIV13',name:'Foto grupal'},{n:'CIV14',name:'N. Pépé'},{n:'CIV15',name:'J. Kodjia'},{n:'CIV16',name:'S. Deli 2'},
+    {n:'CIV17',name:'W. Zaha'},{n:'CIV18',name:'I. Doué'},{n:'CIV19',name:'S. Adingra'},{n:'CIV20',name:'O. Diakité'},
+  ]},
+  {code:'SWE',name:'Suecia',flag:'🇸🇪',special:true,stickers:[
+    {n:'SWE1',name:'Escudo',foil:true},{n:'SWE2',name:'R. Olsen'},{n:'SWE3',name:'M. Lustig'},{n:'SWE4',name:'V. Lindelöf'},
+    {n:'SWE5',name:'M. Danielson'},{n:'SWE6',name:'L. Augustinsson'},{n:'SWE7',name:'F. Helander'},{n:'SWE8',name:'A. Ekdal'},
+    {n:'SWE9',name:'K. Olsson'},{n:'SWE10',name:'E. Forsberg'},{n:'SWE11',name:'A. Isak'},{n:'SWE12',name:'V. Gyökeres'},
+    {n:'SWE13',name:'Foto grupal'},{n:'SWE14',name:'J. Larsson'},{n:'SWE15',name:'A. Elanga'},{n:'SWE16',name:'D. Kulusevski'},
+    {n:'SWE17',name:'Z. Ibrahimović'},{n:'SWE18',name:'P. Jansson'},{n:'SWE19',name:'H. Larsson'},{n:'SWE20',name:'R. Bardghji'},
+  ]},
+];
 
-### POR:
+let state={},currentTeam=null,currentView='all';
+function load(){try{const s=localStorage.getItem(SK);if(s)state=JSON.parse(s);}catch(e){}}
+function save(){try{localStorage.setItem(SK,JSON.stringify(state));}catch(e){}}
+function key(c,n){return c+'_'+n;}
+function get(c,n){return state[key(c,n)]||0;}
+function totals(){let h=0,r=0;Object.values(state).forEach(v=>{if(v===1)h++;else if(v>=2)r+=v-1;});return{h,r};}
+function totalSt(){return TEAMS.reduce((a,t)=>a+t.stickers.length,0);}
+function prog(t){const total=t.stickers.length,have=t.stickers.filter(s=>get(t.code,s.n)>=1).length;return{have,total};}
 
-```js
- div.className='team-card fade-in'+(have===total?' done':'');
-```
+function updateStats(){
+  const{h,r}=totals(),total=totalSt(),pct=Math.round(h/total*100);
+  document.getElementById('stats').innerHTML=`
+    <div class="stat"><div class="stat-num green">${h}</div><div class="stat-lbl">Tengo</div></div>
+    <div class="stat"><div class="stat-num">${total-h}</div><div class="stat-lbl">Faltan</div></div>
+    <div class="stat"><div class="stat-num amber">${r}</div><div class="stat-lbl">Repetidas</div></div>
+    <div class="stat"><div class="stat-num blue">${pct}%</div><div class="stat-lbl">Completado</div></div>
+  `;
+  document.getElementById('hp-fill').style.width=pct+'%';
+}
+
+function clickSticker(code,n,el){
+  const cur=get(code,n),next=cur>=2?0:cur+1;
+  state[key(code,n)]=next;save();
+  el.className='sticker'+(el.dataset.foil==='true'?' foil':'')+(next>=1?' have':'')+(next>=2?' repeated':'');
+  const b=el.querySelector('.rep-badge');
+  if(next>=2){if(!b){const nb=document.createElement('span');nb.className='rep-badge';nb.textContent=next-1;el.appendChild(nb);}else b.textContent=next-1;}
+  else if(b)b.remove();
+  const ck=el.querySelector('.sticker-check');
+  if(next===1&&!ck){const c=document.createElement('span');c.className='sticker-check';c.textContent='✓';el.appendChild(c);}
+  else if(next!==1&&ck)ck.remove();
+  updateStats();refreshCard(code);
+  // Update detail header prog
+  if(currentTeam===code){
+    const t=TEAMS.find(x=>x.code===code);
+    const{have,total}=prog(t);
+    const pct=Math.round(have/total*100);
+    const pf=document.getElementById('d-prog-fill');
+    if(pf)pf.style.width=pct+'%';
+    document.getElementById('d-sub').textContent=`${have}/${total} láminas · ${t.group&&t.group!=='special'?'Grupo '+t.group:'Especiales'}`;
+  }
+}
+
+function refreshCard(code){
+  const el=document.querySelector(`[data-code="${code}"]`);if(!el)return;
+  const t=TEAMS.find(x=>x.code===code);
+  const{have,total}=prog(t),pct=Math.round(have/total*100);
+  const pf=el.querySelector('.prog-fill');
+  pf.style.width=pct+'%';
+  pf.className='prog-fill'+(have===total?' done-fill':'');
+  el.querySelector('.tc-count').textContent=have+'/'+total;
+  if(have===total)el.classList.add('done');else el.classList.remove('done');
+}
+
+function buildCard(t){
+  const{have,total}=prog(t),pct=Math.round(have/total*100);
+  const d=document.createElement('div');
+  d.className='team-card'+(have===total?' done':'');
+  d.dataset.code=t.code;
+  d.innerHTML=`<div class="tc-top"><span class="tc-flag">${t.flag}</span>
+    <div><div class="tc-name">${t.name}</div>
+    <div class="tc-group">${t.group&&t.group!=='special'?'Grupo '+t.group:'⭐ Especial'}</div></div></div>
+    <div class="tc-bottom">
+      <div class="prog-bar"><div class="prog-fill${have===total?' done-fill':''}" style="width:${pct}%"></div></div>
+      <div class="tc-count">${have}/${total}</div>
+    </div>`;
+  d.onclick=()=>openDetail(t.code);return d;
+}
+
+function renderTeams(view='all'){
+  const grid=document.getElementById('team-grid');grid.innerHTML='';
+  const q=(document.getElementById('search').value||'').toLowerCase();
+  let count=0;
+  TEAMS.forEach(t=>{
+    if(view==='special'&&!t.special)return;
+    if(view==='complete'){const{have,total}=prog(t);if(have<total)return;}
+    if(view==='missing'){const{have,total}=prog(t);if(have===total)return;}
+    if(q){const full=(t.name+' '+t.stickers.map(s=>s.name).join(' ')).toLowerCase();if(!full.includes(q))return;}
+    grid.appendChild(buildCard(t));count++;
+  });
+  document.getElementById('empty').style.display=count===0?'block':'none';
+}
+
+function openDetail(code){
+  const t=TEAMS.find(x=>x.code===code);currentTeam=code;
+  document.getElementById('teams-section').classList.add('hidden');
+  document.getElementById('detail').classList.add('open');
+  document.getElementById('d-flag').textContent=t.flag;
+  document.getElementById('d-name').textContent=t.name;
+  const{have,total}=prog(t),pct=Math.round(have/total*100);
+  document.getElementById('d-sub').textContent=`${have}/${total} láminas · ${t.group&&t.group!=='special'?'Grupo '+t.group:'Especiales'}`;
+  document.getElementById('d-prog-fill').style.width=pct+'%';
+  const cont=document.getElementById('d-stickers');cont.innerHTML='';
+  t.stickers.forEach(s=>{
+    const val=get(t.code,s.n);
+    const el=document.createElement('div');
+    el.className='sticker'+(s.foil?' foil':'')+(val>=1?' have':'')+(val>=2?' repeated':'');
+    el.dataset.foil=s.foil?'true':'false';
+    el.innerHTML=`<div class="s-num">${s.n}</div><span class="s-icon">${s.foil?'⭐':'👤'}</span><div class="s-name">${s.name}</div>`;
+    if(val>=2){const b=document.createElement('span');b.className='rep-badge';b.textContent=val-1;el.appendChild(b);}
+    if(val===1){const c=document.createElement('span');c.className='sticker-check';c.textContent='✓';el.appendChild(c);}
+    el.onclick=()=>clickSticker(t.code,s.n,el);
+    cont.appendChild(el);
+  });
+  window.scrollTo(0,0);
+}
+
+function closeDetail(){
+  document.getElementById('teams-section').classList.remove('hidden');
+  document.getElementById('detail').classList.remove('open');
+  currentTeam=null;renderTeams(currentView);
+}
+function setView(v,el){
+  currentView=v;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');renderTeams(v);
+}
+function filterTeams(){renderTeams(currentView);}
+function resetAll(){if(confirm('¿Reiniciar todo el progreso? Esta acción no se puede deshacer.')){state={};save();updateStats();if(currentTeam)openDetail(currentTeam);else renderTeams(currentView);}}
+
+load();updateStats();renderTeams();
+</script>
+</body>
+</html>
